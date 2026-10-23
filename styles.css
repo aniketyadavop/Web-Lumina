@@ -1,0 +1,1478 @@
+/* ==========================================================================
+   CHITRKAARI // GEN-Z PIXEL ART DESIGN SYSTEM
+   Modern, crisp pixel aesthetic with high visual fidelity & micro-interactions
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap');
+
+:root {
+  /* Core Color Palette */
+  --bg-primary: #F1F1F4;
+  --bg-card: #FFFFFF;
+  --color-electric-blue: #2A1FE0;
+  --color-hot-pink: #FF4FB8;
+  --color-black: #0F0F14;
+  --color-white: #FFFFFF;
+  --color-cyan: #00F0FF;
+  --color-lime: #39FF14;
+  --color-yellow: #FFE600;
+  --color-purple: #9D00FF;
+  --color-border: #0F0F14;
+
+  /* Pixel Shadows */
+  --shadow-1step: 4px 4px 0px var(--color-border);
+  --shadow-1step-blue: 4px 4px 0px var(--color-electric-blue);
+  --shadow-1step-pink: 4px 4px 0px var(--color-hot-pink);
+  --shadow-2step: 8px 8px 0px var(--color-border);
+
+  /* Typography */
+  --font-giant: 'Press Start 2P', cursive;
+  --font-sub: 'Press Start 2P', monospace;
+  --font-label: 'VT323', monospace;
+  --font-sans: 'Pixelify Sans', cursive, sans-serif;
+  --font-silk: 'Silkscreen', monospace;
+}
+
+/* Strict Pixel Rendering & Smooth Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--color-black);
+  font-family: var(--font-label);
+  font-size: 20px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* Custom Pixel Cursor */
+body, button, a, input, select {
+  cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' shape-rendering='crispEdges'%3E%3Cpath d='M2 2h4v4h2v2h2v2h2v2h2v2h-4v2h-2v2H6v2H2V2z' fill='%23000'/%3E%3Cpath d='M4 4h2v4h2v2h2v2h2v2h-2v2H8v2H6v-2H4V4z' fill='%23FFF'/%3E%3C/svg%3E"), auto;
+}
+
+button:hover, a:hover, .clickable:hover {
+  cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' shape-rendering='crispEdges'%3E%3Cpath d='M8 2h4v8h2V6h4v8h-2v4h-2v2h-6v-2H6v-6H4V6h4v4h2V2z' fill='%23000'/%3E%3Cpath d='M10 4h2v8h2V8h2v6h-2v4h-2v2H8v-2H6v-4H6V8h2v4h2V4z' fill='%23FF4FB8'/%3E%3C/svg%3E"), pointer;
+}
+
+/* Visible Pixel Grid Overlay */
+.pixel-grid-bg {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(#cfcfe0 2px, transparent 2px),
+    radial-gradient(#cfcfe0 2px, var(--bg-primary) 2px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+/* ==========================================================================
+   LANDING GATE (FIRST PAGE) // COLLEGE BG & CURSOR-SENSITIVE HEAVY RAIN
+   ========================================================================== */
+#landing-gate {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0b0f1a;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
+  overflow: hidden;
+}
+
+#landing-gate.gate-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Lightning flash effect across the sky */
+#lightning-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 60% 20%, rgba(220, 240, 255, 0.7), rgba(180, 210, 255, 0.35) 60%, transparent 85%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.04s ease;
+}
+
+/* College Pixel Art Background */
+.landing-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/college_bg.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  image-rendering: pixelated;
+  z-index: 1;
+}
+
+/* Subtle ground shadow to anchor the scene */
+.landing-bg-layer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent);
+  pointer-events: none;
+}
+
+/* Canvas Rain Overlay */
+#rain-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Moving Clouds Container */
+#clouds-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45%;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Landing Top Bar / HUD */
+.landing-hud-top {
+  position: relative;
+  z-index: 10;
+  width: 94%;
+  max-width: 1200px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.landing-badge {
+  background: rgba(15, 15, 20, 0.88);
+  backdrop-filter: blur(4px);
+  border: 3px solid var(--color-black);
+  box-shadow: var(--shadow-1step);
+  padding: 8px 16px;
+  color: #FFFFFF;
+  font-family: var(--font-label);
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.landing-badge .pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-lime);
+  box-shadow: 0 0 8px var(--color-lime);
+  animation: pulseBlink 1s infinite alternate steps(2);
+}
+
+.landing-weather-pill {
+  background: var(--color-yellow);
+  color: var(--color-black);
+  border: 3px solid var(--color-black);
+  box-shadow: var(--shadow-1step);
+  padding: 8px 14px;
+  font-family: var(--font-sub);
+  font-size: 0.65rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Landing Middle Title Overlay */
+.landing-title-card {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.94);
+  border: 4px solid var(--color-black);
+  box-shadow: var(--shadow-2step);
+  padding: 24px 36px;
+  max-width: 760px;
+  margin: auto 20px 20px;
+  animation: floatBounce 4s ease-in-out infinite alternate;
+}
+
+.landing-college-label {
+  font-family: var(--font-sub);
+  font-size: 0.75rem;
+  color: #555;
+  margin-bottom: 8px;
+  letter-spacing: 1.5px;
+}
+
+.landing-brand-heading {
+  font-family: var(--font-giant);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--color-electric-blue);
+  text-shadow: 3px 3px 0 var(--color-black), 6px 6px 0 rgba(42, 31, 224, 0.35);
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.landing-subheading {
+  font-family: var(--font-label);
+  font-size: 1.4rem;
+  color: var(--color-black);
+  line-height: 1.3;
+}
+
+/* Landing Center-Bottom START Button */
+.landing-hud-bottom {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.start-btn-pixel {
+  position: relative;
+  background: var(--color-hot-pink);
+  color: #000000;
+  font-family: var(--font-giant);
+  font-size: clamp(0.9rem, 2.2vw, 1.25rem);
+  padding: 18px 36px;
+  border: 4px solid var(--color-black);
+  box-shadow: 6px 6px 0px var(--color-black);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+  user-select: none;
+}
+
+.start-btn-pixel:hover {
+  background: #ff72c9;
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px var(--color-black);
+}
+
+.start-btn-pixel:active {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0px var(--color-black);
+}
+
+.start-btn-pixel .pixel-arrow {
+  display: inline-block;
+  animation: arrowNudge 0.8s infinite alternate steps(3);
+}
+
+.landing-hint {
+  font-family: var(--font-sub);
+  font-size: 0.65rem;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 0 #000000;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   TRANSITION SHUTTER OVERLAY
+   ========================================================================== */
+#pixel-shutter {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  opacity: 0;
+}
+
+#pixel-shutter.shutter-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shutter-block {
+  background: var(--color-black);
+  transform: scale(0);
+  transition: transform 0.3s steps(4);
+}
+
+#pixel-shutter.shutter-active .shutter-block {
+  transform: scale(1);
+}
+
+/* ==========================================================================
+   MAIN WEBSITE APP LAYOUT
+   ========================================================================== */
+#main-app {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pixel Top Navigation Bar */
+.pixel-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: var(--color-white);
+  border-bottom: 4px solid var(--color-border);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-pixel-box {
+  background: var(--color-electric-blue);
+  color: var(--color-white);
+  font-family: var(--font-giant);
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  border: 3px solid var(--color-border);
+  box-shadow: 3px 3px 0 var(--color-border);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-blinker {
+  animation: cursorBlink 0.8s infinite steps(2);
+}
+
+.nav-center-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-stat-pill {
+  background: var(--bg-primary);
+  border: 2px solid var(--color-border);
+  box-shadow: 2px 2px 0 var(--color-border);
+  padding: 6px 12px;
+  font-family: var(--font-label);
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Retro Pixel Button Styles */
+.pixel-btn {
+  font-family: var(--font-sub);
+  font-size: 0.68rem;
+  padding: 10px 16px;
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  background: var(--color-white);
+  color: var(--color-black);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: transform 0.06s ease, box-shadow 0.06s ease, background 0.12s ease;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pixel-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-border);
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--color-border);
+}
+
+.pixel-btn-pink {
+  background: var(--color-hot-pink);
+  color: var(--color-black);
+}
+
+.pixel-btn-pink:hover {
+  background: #ff72c9;
+}
+
+.pixel-btn-blue {
+  background: var(--color-electric-blue);
+  color: var(--color-white);
+}
+
+.pixel-btn-blue:hover {
+  background: #473df0;
+}
+
+.pixel-btn-yellow {
+  background: var(--color-yellow);
+  color: var(--color-black);
+}
+
+.pixel-btn-lime {
+  background: var(--color-lime);
+  color: var(--color-black);
+}
+
+/* ==========================================================================
+   AGENCY HERO SECTION
+   ========================================================================== */
+.agency-hero {
+  max-width: 1280px;
+  margin: 40px auto 30px;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.hero-card-frame {
+  background: var(--bg-card);
+  border: 4px solid var(--color-border);
+  box-shadow: var(--shadow-2step);
+  padding: 48px 36px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-corner-badge {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: var(--color-yellow);
+  border: 2px solid var(--color-border);
+  box-shadow: 3px 3px 0 var(--color-border);
+  padding: 6px 12px;
+  font-family: var(--font-sub);
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.hero-college-tag {
+  font-family: var(--font-sub);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #666;
+  margin-bottom: 16px;
+  display: inline-block;
+  background: var(--bg-primary);
+  border: 2px solid var(--color-border);
+  padding: 4px 12px;
+}
+
+/* GIANT Blocky Pixel Headline in Electric Blue (#2A1FE0) */
+.pixel-giant-title {
+  font-family: var(--font-giant);
+  font-size: clamp(2.5rem, 6.5vw, 5rem);
+  line-height: 1.1;
+  color: var(--color-electric-blue);
+  text-shadow: 
+    4px 4px 0px var(--color-border), 
+    8px 8px 0px rgba(42, 31, 224, 0.28);
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+/* Black Pixel Subheading Underneath */
+.pixel-subheading {
+  font-family: var(--font-sub);
+  font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+  line-height: 1.7;
+  color: var(--color-black);
+  max-width: 820px;
+  margin: 0 auto 32px;
+}
+
+/* Pixel Grid Icons Row */
+.pixel-icons-grid-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.pixel-icon-badge {
+  background: var(--bg-primary);
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-label);
+  font-size: 1.2rem;
+  transition: transform 0.1s ease;
+}
+
+.pixel-icon-badge:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Red 3D-ish Pixel Heart */
+.pixel-heart-3d {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  animation: heartPulse 1.2s infinite steps(2);
+}
+
+/* Pixel Sparkle */
+.pixel-sparkle {
+  animation: sparkleRotate 2.5s infinite linear;
+}
+
+/* Hero CTA Row */
+.hero-cta-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* STATS ROW WITH BIG PIXEL NUMBERS (20+, 85+, 42+) */
+.stats-pixel-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  border-top: 3px dashed var(--color-border);
+  padding-top: 32px;
+}
+
+.stat-pixel-card {
+  background: var(--bg-primary);
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 20px 16px;
+  text-align: center;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.stat-pixel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 var(--color-electric-blue);
+}
+
+.stat-number-giant {
+  font-family: var(--font-giant);
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
+  color: var(--color-electric-blue);
+  text-shadow: 2px 2px 0 var(--color-border);
+  margin-bottom: 8px;
+}
+
+.stat-number-giant.pink-stat {
+  color: var(--color-hot-pink);
+}
+
+.stat-label-pixel {
+  font-family: var(--font-label);
+  font-size: 1.25rem;
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   GEN-Z CULTURE TABS SYSTEM
+   ========================================================================== */
+.culture-tabs-wrapper {
+  position: relative;
+  max-width: 1280px;
+  margin: 20px auto 60px;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.tabs-nav-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  border-bottom: 4px solid var(--color-border);
+  scrollbar-width: none;
+}
+.tabs-nav-bar::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  background: var(--bg-card);
+  color: var(--color-black);
+  font-family: var(--font-sub);
+  font-size: 0.72rem;
+  padding: 14px 20px;
+  border: 3px solid var(--color-border);
+  border-bottom: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  transition: background 0.1s, transform 0.1s;
+  user-select: none;
+}
+
+.tab-btn:hover {
+  background: #f7d5eb;
+  transform: translateY(-2px);
+}
+
+.tab-btn.active-tab {
+  background: var(--color-electric-blue);
+  color: var(--color-white);
+  padding-top: 18px;
+  box-shadow: inset 0 3px 0 var(--color-cyan);
+}
+
+.tab-content-panel {
+  background: var(--bg-card);
+  border: 4px solid var(--color-border);
+  border-top: none;
+  box-shadow: var(--shadow-2step);
+  padding: 36px 30px;
+  min-height: 480px;
+  display: none;
+}
+
+.tab-content-panel.active-panel {
+  display: block;
+  animation: tabFadeIn 0.25s ease-out;
+}
+
+/* ==========================================================================
+   TAB 1: MUSIC // 8-BIT BOOMBOX & SYNTHESIZER
+   ========================================================================== */
+.music-deck-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .music-deck-grid { grid-template-columns: 1fr; }
+}
+
+.cassette-player-box {
+  background: #181822;
+  border: 4px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 24px;
+  color: #fff;
+}
+
+.cassette-screen-hud {
+  background: #000;
+  border: 2px solid #333;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.track-meta-title {
+  font-family: var(--font-sub);
+  font-size: 0.85rem;
+  color: var(--color-cyan);
+  margin-bottom: 6px;
+}
+
+.track-meta-artist {
+  font-family: var(--font-label);
+  font-size: 1.2rem;
+  color: #aaa;
+}
+
+/* Cassette Visual Reels */
+.cassette-art-wrapper {
+  background: #252538;
+  border: 3px solid #000;
+  padding: 20px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cassette-spool {
+  width: 60px;
+  height: 60px;
+  background: #111;
+  border: 4px solid var(--color-yellow);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cassette-spool::after {
+  content: '';
+  width: 18px;
+  height: 18px;
+  background: var(--color-white);
+  border-radius: 50%;
+}
+
+.playing-music .cassette-spool {
+  animation: spoolSpin 2s linear infinite;
+}
+
+/* Dancing Equalizer Bars */
+.pixel-equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 48px;
+  background: #0d0d14;
+  padding: 6px 12px;
+  border: 2px solid #333;
+  margin-bottom: 20px;
+}
+
+.eq-bar {
+  flex: 1;
+  background: var(--color-lime);
+  height: 20%;
+  transition: height 0.08s ease;
+}
+
+.playing-music .eq-bar:nth-child(odd) {
+  animation: eqBounce1 0.4s infinite alternate ease-in-out;
+}
+.playing-music .eq-bar:nth-child(even) {
+  animation: eqBounce2 0.35s infinite alternate ease-in-out;
+}
+
+.music-controls-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.playlist-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.playlist-item {
+  background: var(--bg-primary);
+  border: 3px solid var(--color-border);
+  box-shadow: 3px 3px 0 var(--color-border);
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.08s ease;
+}
+
+.playlist-item:hover {
+  transform: translate(-2px, -2px);
+  background: #fde8f5;
+}
+
+.playlist-item.active-track {
+  border-color: var(--color-electric-blue);
+  background: #e9e8fd;
+}
+
+/* ==========================================================================
+   TAB 2: ART // INTERACTIVE PIXEL PAINTPAD & GALLERY
+   ========================================================================== */
+.art-studio-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 36px;
+}
+
+@media (max-width: 900px) {
+  .art-studio-grid { grid-template-columns: 1fr; }
+}
+
+.paintpad-frame {
+  background: var(--bg-primary);
+  border: 4px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+#pixel-canvas {
+  background: #FFFFFF;
+  border: 3px solid var(--color-border);
+  box-shadow: 4px 4px 0 var(--color-border);
+  display: grid;
+  grid-template-columns: repeat(16, 18px);
+  grid-template-rows: repeat(16, 18px);
+  gap: 1px;
+  background-color: #ddd;
+  cursor: crosshair;
+  user-select: none;
+}
+
+.pixel-cell {
+  background-color: #FFFFFF;
+  width: 18px;
+  height: 18px;
+}
+
+.color-palette-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-border);
+  box-shadow: 2px 2px 0 var(--color-border);
+  cursor: pointer;
+}
+
+.color-swatch.active-color {
+  outline: 3px solid var(--color-electric-blue);
+  transform: scale(1.15);
+}
+
+.art-gallery-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.art-card {
+  background: var(--bg-primary);
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 12px;
+  transition: transform 0.1s ease;
+}
+
+.art-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 var(--color-electric-blue);
+}
+
+.art-thumb-preview {
+  width: 100%;
+  height: 140px;
+  background: #000;
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   TAB 3: FASHION // PIXEL AVATAR DRESS-UP & THRIFT DROPS
+   ========================================================================== */
+.fashion-layout-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .fashion-layout-grid { grid-template-columns: 1fr; }
+}
+
+.avatar-stage-box {
+  background: var(--bg-primary);
+  border: 4px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 24px;
+  text-align: center;
+}
+
+.avatar-mannequin-display {
+  width: 200px;
+  height: 260px;
+  margin: 0 auto 20px;
+  background: #fff;
+  border: 3px solid var(--color-border);
+  box-shadow: 4px 4px 0 var(--color-border);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avatar-slot-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.slot-control-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 2px solid var(--color-border);
+  padding: 6px 12px;
+  font-family: var(--font-label);
+  font-size: 1.15rem;
+}
+
+.drip-score-banner {
+  background: var(--color-lime);
+  border: 3px solid var(--color-border);
+  box-shadow: 3px 3px 0 var(--color-border);
+  padding: 12px;
+  font-family: var(--font-sub);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.thrift-drops-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.thrift-card {
+  background: var(--bg-primary);
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 16px;
+  position: relative;
+}
+
+.thrift-tag-pill {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--color-hot-pink);
+  color: #000;
+  font-family: var(--font-sub);
+  font-size: 0.55rem;
+  padding: 4px 8px;
+  border: 2px solid var(--color-border);
+}
+
+/* ==========================================================================
+   TAB 4: MEME // BRAINROT VAULT, GENERATOR & SOUNDBOARD
+   ========================================================================== */
+.meme-section-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.soundboard-deck {
+  background: #181824;
+  border: 4px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 24px;
+  color: #fff;
+}
+
+.soundboard-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.sound-pad-btn {
+  background: var(--color-electric-blue);
+  color: #fff;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  padding: 14px 16px;
+  font-family: var(--font-sub);
+  font-size: 0.65rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.sound-pad-btn:hover {
+  background: var(--color-hot-pink);
+  color: #000;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+}
+
+.sound-pad-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Interactive Meme Generator */
+.meme-gen-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  background: var(--bg-primary);
+  border: 4px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 24px;
+}
+
+@media (max-width: 900px) {
+  .meme-gen-container { grid-template-columns: 1fr; }
+}
+
+.meme-preview-canvas-box {
+  background: #000;
+  border: 3px solid var(--color-border);
+  box-shadow: 4px 4px 0 var(--color-border);
+  min-height: 280px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  text-align: center;
+}
+
+.meme-text-top, .meme-text-bottom {
+  font-family: var(--font-giant);
+  font-size: 1.1rem;
+  color: #FFF;
+  text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000;
+  text-transform: uppercase;
+  z-index: 2;
+  word-break: break-word;
+}
+
+.meme-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pixel-input {
+  background: #fff;
+  border: 3px solid var(--color-border);
+  box-shadow: 3px 3px 0 var(--color-border);
+  padding: 10px 14px;
+  font-family: var(--font-label);
+  font-size: 1.25rem;
+  outline: none;
+}
+
+.pixel-input:focus {
+  border-color: var(--color-electric-blue);
+}
+
+/* Meme Gallery */
+.meme-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.meme-card {
+  background: var(--bg-primary);
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 16px;
+}
+
+.meme-art-box {
+  background: #000;
+  border: 2px solid var(--color-border);
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.meme-vote-btn {
+  background: #fff;
+  border: 2px solid var(--color-border);
+  box-shadow: 2px 2px 0 var(--color-border);
+  padding: 6px 12px;
+  font-family: var(--font-label);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   TAB 5: INTERNET TRENDS // AURA TRACKER, SLANG & STREAM
+   ========================================================================== */
+.trends-deck-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .trends-deck-grid { grid-template-columns: 1fr; }
+}
+
+.aura-calculator-box {
+  background: var(--bg-primary);
+  border: 4px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 24px;
+}
+
+.aura-score-display {
+  background: var(--color-electric-blue);
+  color: var(--color-white);
+  border: 3px solid var(--color-border);
+  box-shadow: 3px 3px 0 var(--color-border);
+  padding: 16px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.aura-score-number {
+  font-family: var(--font-giant);
+  font-size: 2.2rem;
+  color: var(--color-yellow);
+  text-shadow: 2px 2px 0 #000;
+}
+
+.aura-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aura-check-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 2px solid var(--color-border);
+  padding: 10px 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.aura-check-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-hot-pink);
+}
+
+.npc-stream-simulator {
+  background: #0f0f18;
+  border: 4px solid var(--color-border);
+  box-shadow: var(--shadow-1step);
+  padding: 20px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+}
+
+.stream-chat-feed {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: #000;
+  border: 2px solid #333;
+  margin: 14px 0;
+  font-family: var(--font-label);
+  font-size: 1.15rem;
+}
+
+.chat-bubble {
+  line-height: 1.2;
+}
+
+.chat-bubble .username {
+  color: var(--color-yellow);
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   AGENCY COLLABORATION / FEST FOOTER
+   ========================================================================== */
+.agency-footer-section {
+  background: #0F0F14;
+  color: #FFFFFF;
+  border-top: 4px solid var(--color-electric-blue);
+  padding: 48px 24px 32px;
+  margin-top: auto;
+}
+
+.footer-inner-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.footer-brand-col {
+  max-width: 420px;
+}
+
+.footer-brand-title {
+  font-family: var(--font-giant);
+  font-size: 1.4rem;
+  color: var(--color-hot-pink);
+  margin-bottom: 14px;
+}
+
+.footer-tagline {
+  font-family: var(--font-label);
+  font-size: 1.25rem;
+  color: #aaa;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.footer-links-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--font-label);
+  font-size: 1.25rem;
+}
+
+.footer-links-col a {
+  color: var(--color-cyan);
+  text-decoration: none;
+}
+
+.footer-links-col a:hover {
+  color: var(--color-hot-pink);
+  text-decoration: underline;
+}
+
+.footer-bottom-row {
+  max-width: 1280px;
+  margin: 32px auto 0;
+  padding-top: 20px;
+  border-top: 2px dashed #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: var(--font-label);
+  color: #777;
+}
+
+/* ==========================================================================
+   CRAWLING BUGS STYLES & PARTICLES
+   ========================================================================== */
+#bug-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.crawling-pixel-bug {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  pointer-events: auto;
+  cursor: crosshair !important;
+  user-select: none;
+  transition: opacity 0.4s ease;
+  will-change: transform;
+}
+
+.crawling-pixel-bug.squashed {
+  transform: scale(1.4, 0.4) rotate(45deg) !important;
+  opacity: 0.6;
+}
+
+.bug-floating-score {
+  position: fixed;
+  z-index: 1001;
+  font-family: var(--font-sub);
+  font-size: 0.75rem;
+  color: var(--color-hot-pink);
+  text-shadow: 2px 2px 0 #000;
+  pointer-events: none;
+  animation: floatUpFade 1.2s forwards steps(8);
+}
+
+.bug-splat-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  z-index: 1001;
+  pointer-events: none;
+  animation: splatParticle 0.6s forwards steps(5);
+}
+
+/* CRT Scanline Filter Overlay (Toggleable) */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.04),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.04)
+  );
+  background-size: 100% 4px, 6px 100%;
+  display: none;
+}
+
+body.crt-active .crt-overlay {
+  display: block;
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulseBlink {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+@keyframes floatBounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+@keyframes arrowNudge {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(8px); }
+}
+
+@keyframes cursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes sparkleRotate {
+  0% { transform: rotate(0deg) scale(0.9); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(0.9); }
+}
+
+@keyframes spoolSpin {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes eqBounce1 {
+  0% { height: 15%; }
+  50% { height: 90%; }
+  100% { height: 40%; }
+}
+
+@keyframes eqBounce2 {
+  0% { height: 80%; }
+  50% { height: 25%; }
+  100% { height: 95%; }
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatUpFade {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-40px); }
+}
+
+@keyframes splatParticle {
+  0% { opacity: 1; transform: translate(0, 0); }
+  100% { opacity: 0; transform: translate(var(--vx), var(--vy)); }
+}

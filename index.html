@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chitrkaari // Gen-Z Pixel Art Creative Agency</title>
+  <meta name="description" content="Chitrkaari is a modern pixel art creative agency celebrating Gen-Z college culture, music, fashion, memes, art, and internet trends.">
+
+  <!-- Pixel Art Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Favicon SVG Pixel Heart -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Cpath d='M2 4h4v2h4V4h4v4h-2v2h-2v2h-2v2H8v-2H6v-2H4v-2H2V4z' fill='%23FF2A55'/%3E%3Cpath d='M4 4h2v2H4V4z' fill='%23FFF'/%3E%3C/svg%3E">
+</head>
+<body class="pixel-grid-bg">
+
+  <!-- =========================================================================
+       1. LANDING GATE (FIRST PAGE): COLLEGE ART, MOVING CLOUDS, HEAVY RAIN, START BTN
+       ========================================================================= -->
+  <section id="landing-gate" aria-label="Campus Gateway Experience">
+    <!-- College Pixel Art Panorama Layer -->
+    <div class="landing-bg-layer" id="landing-college-bg"></div>
+
+    <!-- Drifting Pixel Clouds Layer (Moving Left to Right) -->
+    <div id="clouds-container" aria-hidden="true"></div>
+
+    <!-- Heavy Rain Canvas (Follows Cursor Direction & Velocity) -->
+    <canvas id="rain-canvas" aria-hidden="true"></canvas>
+
+    <!-- Thunderstorm Lightning Flash Overlay -->
+    <div id="lightning-overlay" aria-hidden="true"></div>
+
+    <!-- Top HUD Banner -->
+    <header class="landing-hud-top">
+      <div class="landing-badge">
+        <span class="pulse-dot"></span>
+        <span>DRONACHARYA COLLEGE OF ENGINEERING // CAMPUS GATEWAY</span>
+      </div>
+      <div class="landing-weather-pill">
+        <span>⚡ WEATHER: THUNDERSTORM</span>
+        <span style="opacity:0.6;">|</span>
+        <span>WIND: CURSOR TRACKING</span>
+      </div>
+    </header>
+
+    <!-- Center Card & Branding -->
+    <div class="landing-title-card">
+      <div class="landing-college-label">CAMPUS CREATIVE COLLECTIVE PRESENTS</div>
+      <h1 class="landing-brand-heading">CHITRKAARI</h1>
+      <p class="landing-subheading">
+        WHERE DCE MEETS GEN-Z CHAOS: MUSIC • ART • FASHION • MEMES • INTERNET TRENDS
+      </p>
+    </div>
+
+    <!-- Center-Bottom START Button -->
+    <footer class="landing-hud-bottom">
+      <button id="start-experience-btn" class="start-btn-pixel" aria-label="Enter Main Website">
+        <span>[ ENTER CHITRKAARI ]</span>
+        <span class="pixel-arrow">▶▶</span>
+      </button>
+      <div class="landing-hint">
+        ⚡ MOVE CURSOR TO STEER THE STORM • TAP START TO ENTER
+      </div>
+    </footer>
+  </section>
+
+  <!-- Retro Pixel Shutter Transition Curtain -->
+  <div id="pixel-shutter" aria-hidden="true"></div>
+
+  <!-- CRT Scanline Filter Overlay (Optional Toggle) -->
+  <div class="crt-overlay" aria-hidden="true"></div>
+
+  <!-- Bug Container Layer (Bugs Crawling Everywhere!) -->
+  <div id="bug-container" aria-hidden="true"></div>
+
+  <!-- =========================================================================
+       2. MAIN WEBSITE APP: MODERN CLEAN PIXEL ART AGENCY HOMEPAGE
+       ========================================================================= -->
+  <main id="main-app">
+    
+    <!-- Top Sticky Pixel Navigation Bar -->
+    <nav class="pixel-navbar" aria-label="Main Navigation">
+      <div class="brand-badge">
+        <div class="brand-pixel-box">
+          <span>👾 CHITRKAARI.EXE</span>
+          <span class="brand-blinker">_</span>
+        </div>
+      </div>
+
+      <div class="nav-center-info">
+        <div class="nav-stat-pill">
+          <span>🕒 CAMPUS TIME:</span>
+          <span id="pixel-clock">12:00:00 IST</span>
+        </div>
+        <div class="nav-stat-pill" title="Click crawling bugs to squish them!">
+          <span>🐛 SQUASHED:</span>
+          <strong class="bug-counter-val" style="color:var(--color-hot-pink);">0</strong>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Spawn More Bugs Button -->
+        <button id="spawn-bugs-btn" class="pixel-btn pixel-btn-yellow" title="Spawn 5 more bugs on screen">
+          <span>+5 BUGS 🐛</span>
+        </button>
+
+        <!-- Sound Toggle Button -->
+        <button id="sound-toggle-btn" class="pixel-btn" title="Toggle 8-bit Audio">
+          <span id="sound-icon">🔊</span> SOUND
+        </button>
+
+        <!-- CRT Filter Toggle -->
+        <button id="crt-toggle-btn" class="pixel-btn" title="Toggle Retro CRT Scanlines">
+          📺 CRT
+        </button>
+
+        <!-- Return to College Gate Button -->
+        <button id="return-gate-btn" class="pixel-btn pixel-btn-pink" title="Return to College Storm Gate">
+          ⚡ STORM GATE
+        </button>
+      </div>
+    </nav>
+
+    <!-- Agency Hero Header Section -->
+    <header class="agency-hero">
+      <div class="hero-card-frame">
+        <div class="hero-corner-badge">
+          <span>★</span> DCE BATCH 2026 OFFICIAL
+        </div>
+
+        <div class="hero-content">
+          <div class="hero-college-tag">[ DRONACHARYA COLLEGE OF ENGINEERING // CREATIVE HUB ]</div>
+          
+          <!-- Giant Blocky Electric Blue Headline (#2A1FE0) -->
+          <h1 class="pixel-giant-title">CHITRKAARI</h1>
+
+          <!-- Black Pixel Subheading Underneath -->
+          <p class="pixel-subheading">
+            THE CAMPUS CREATIVE AGENCY CELEBRATING GEN-Z CULTURE, LO-FI TUNES, STREETWEAR DRIP, BRAINROT MEMES, AND UNFILTERED INTERNET LORE.
+          </p>
+
+          <!-- Pixel-Art Icons on Visible Grid: 3D Red Heart, Pixel Clouds, Sparkles -->
+          <div class="pixel-icons-grid-row" aria-label="Pixel Badges">
+            
+            <!-- Red 3D-ish Pixel Heart -->
+            <div class="pixel-icon-badge" title="Campus Love">
+              <svg class="pixel-heart-3d" viewBox="0 0 16 16" fill="none" shape-rendering="crispEdges">
+                <!-- Drop/3D Step Shadow -->
+                <rect x="3" y="11" width="2" height="2" fill="#000"/>
+                <rect x="5" y="13" width="2" height="2" fill="#000"/>
+                <rect x="7" y="15" width="2" height="1" fill="#000"/>
+                <rect x="9" y="13" width="2" height="2" fill="#000"/>
+                <rect x="11" y="11" width="2" height="2" fill="#000"/>
+                <rect x="13" y="5" width="2" height="6" fill="#000"/>
+                <!-- Dark Red 3D Underlayer -->
+                <rect x="2" y="4" width="4" height="6" fill="#990022"/>
+                <rect x="10" y="4" width="4" height="6" fill="#990022"/>
+                <rect x="4" y="10" width="8" height="3" fill="#990022"/>
+                <rect x="6" y="13" width="4" height="2" fill="#990022"/>
+                <!-- Main Red Heart -->
+                <rect x="2" y="3" width="4" height="6" fill="#FF1E4E"/>
+                <rect x="6" y="4" width="4" height="6" fill="#FF1E4E"/>
+                <rect x="10" y="3" width="4" height="6" fill="#FF1E4E"/>
+                <rect x="4" y="9" width="8" height="3" fill="#FF1E4E"/>
+                <rect x="6" y="12" width="4" height="2" fill="#FF1E4E"/>
+                <!-- 3D Specular Pixel Highlight -->
+                <rect x="3" y="4" width="2" height="2" fill="#FFFFFF"/>
+                <rect x="11" y="4" width="2" height="2" fill="#FFFFFF"/>
+              </svg>
+              <span>3D PIXEL HEART</span>
+            </div>
+
+            <!-- Pixel Cloud -->
+            <div class="pixel-icon-badge" title="Drifting Pixel Cloud">
+              <svg width="28" height="16" viewBox="0 0 28 16" fill="currentColor" shape-rendering="crispEdges" style="color:var(--color-electric-blue);">
+                <rect x="8" y="2" width="12" height="2"/>
+                <rect x="6" y="4" width="16" height="2"/>
+                <rect x="4" y="6" width="20" height="2"/>
+                <rect x="2" y="8" width="24" height="4"/>
+                <rect x="0" y="10" width="28" height="4"/>
+              </svg>
+              <span>PIXEL CLOUDS</span>
+            </div>
+
+            <!-- Pixel Sparkles -->
+            <div class="pixel-icon-badge" title="Twinkling Pixel Sparkle">
+              <svg class="pixel-sparkle" width="22" height="22" viewBox="0 0 16 16" fill="#FFE600" shape-rendering="crispEdges">
+                <rect x="7" y="1" width="2" height="14"/>
+                <rect x="1" y="7" width="14" height="2"/>
+                <rect x="5" y="5" width="6" height="6"/>
+                <rect x="7" y="7" width="2" height="2" fill="#FFF"/>
+              </svg>
+              <span>SPARKLES</span>
+            </div>
+
+            <!-- Floppy Disk Aura Badge -->
+            <div class="pixel-icon-badge" title="Retro Diskette">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="none" shape-rendering="crispEdges">
+                <rect x="2" y="2" width="12" height="12" fill="#2A1FE0"/>
+                <rect x="4" y="2" width="6" height="5" fill="#FFF"/>
+                <rect x="4" y="9" width="8" height="4" fill="#00F0FF"/>
+                <rect x="7" y="10" width="2" height="3" fill="#111"/>
+              </svg>
+              <span>1.44 MB VIBES</span>
+            </div>
+          </div>
+
+          <!-- Hot-Pink (#FF4FB8) Pixel Button with Hard 1-Step Shadow -->
+          <div class="hero-cta-group">
+            <a href="#culture-section" class="pixel-btn pixel-btn-pink" style="font-size:0.85rem; padding:16px 28px;">
+              <span>[ EXPLORE THE CULTURE ]</span>
+              <span>🔥</span>
+            </a>
+            <button class="pixel-btn pixel-btn-blue" onclick="document.querySelector('[data-tab=art]').click(); window.location.hash='#culture-section';">
+              <span>[ LAUNCH PIXEL CANVAS ]</span>
+              <span>🎨</span>
+            </button>
+          </div>
+
+          <!-- STATS ROW WITH BIG PIXEL NUMBERS (20+, 85+, 42+) -->
+          <div class="stats-pixel-row" aria-label="Agency Statistics">
+            
+            <div class="stat-pixel-card">
+              <div class="stat-number-giant">20+</div>
+              <div class="stat-label-pixel">Exclusive Pixel Drops</div>
+            </div>
+
+            <div class="stat-pixel-card">
+              <div class="stat-number-giant pink-stat">85+</div>
+              <div class="stat-label-pixel">DCE Campus Creators</div>
+            </div>
+
+            <div class="stat-pixel-card">
+              <div class="stat-number-giant">42+</div>
+              <div class="stat-label-pixel">Viral Memes & Trends</div>
+            </div>
+
+            <div class="stat-pixel-card">
+              <div class="stat-number-giant pink-stat">99+</div>
+              <div class="stat-label-pixel">Max Campus Brainrot</div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================================================
+         3. GEN-Z CULTURE SECTION (5 TABS: MUSIC, ART, FASHION, MEME, TRENDS)
+         ========================================================================= -->
+    <section id="culture-section" class="culture-tabs-wrapper" aria-label="Campus Culture Experience">
+      
+      <!-- Tab Selector Navigation -->
+      <div class="tabs-nav-bar" role="tablist">
+        <button class="tab-btn active-tab" data-tab="music" role="tab" aria-selected="true">
+          <span>🎵 1. MUSIC</span>
+        </button>
+        <button class="tab-btn" data-tab="art" role="tab" aria-selected="false">
+          <span>🎨 2. ART</span>
+        </button>
+        <button class="tab-btn" data-tab="fashion" role="tab" aria-selected="false">
+          <span>👗 3. FASHION</span>
+        </button>
+        <button class="tab-btn" data-tab="meme" role="tab" aria-selected="false">
+          <span>🐸 4. MEME</span>
+        </button>
+        <button class="tab-btn" data-tab="trends" role="tab" aria-selected="false">
+          <span>⚡ 5. INTERNET TRENDS</span>
+        </button>
+      </div>
+
+      <!-- =====================================================================
+           TAB 1: MUSIC // 8-BIT CASSETTE JUKEBOX & SYNTHESIZER
+           ===================================================================== -->
+      <div id="tab-music" class="tab-content-panel active-panel" role="tabpanel">
+        <div style="margin-bottom:24px;">
+          <h2 style="font-family:var(--font-giant); font-size:1.4rem; color:var(--color-electric-blue); margin-bottom:8px;">
+            [ DCE 8-BIT LO-FI & HYPERPOP JUKEBOX ]
+          </h2>
+          <p style="font-family:var(--font-label); font-size:1.3rem;">
+            Real-time synthesized chiptune rhythms, campus study beats, and hostel DJ mixtapes. Zero external audio lag!
+          </p>
+        </div>
+
+        <div class="music-deck-grid">
+          <!-- Cassette Player UI -->
+          <div class="cassette-player-box">
+            <div class="cassette-screen-hud">
+              <div style="font-size:0.8rem; color:#888; font-family:var(--font-sub); margin-bottom:4px;">
+                ● NOW PLAYING // DCE SOUND SYSTEM
+              </div>
+              <div id="track-title-display" class="track-meta-title">8:30 AM Lab Hyperpop</div>
+              <div id="track-artist-display" class="track-meta-artist">DCE Chiptune Guild // 140 BPM</div>
+            </div>
+
+            <!-- Cassette Tape Graphics -->
+            <div class="cassette-art-wrapper">
+              <div class="cassette-spool"></div>
+              <div style="text-align:center; font-family:var(--font-sub); font-size:0.6rem; color:var(--color-yellow);">
+                CHITRKAARI TAPE<br>SIDE A // 90 MIN
+              </div>
+              <div class="cassette-spool"></div>
+            </div>
+
+            <!-- Dynamic Equalizer Bars -->
+            <div class="pixel-equalizer">
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+            </div>
+
+            <!-- Controls -->
+            <div class="music-controls-bar">
+              <button id="music-prev-btn" class="pixel-btn" title="Previous Track">⏮ PREV</button>
+              <button id="music-play-btn" class="pixel-btn pixel-btn-pink" title="Play or Pause Track">▶ PLAY</button>
+              <button id="music-next-btn" class="pixel-btn" title="Next Track">NEXT ⏭</button>
+            </div>
+          </div>
+
+          <!-- Mixtape Playlist -->
+          <div class="playlist-container">
+            <div style="font-family:var(--font-sub); font-size:0.8rem; color:var(--color-electric-blue); margin-bottom:6px;">
+              [ CAMPUS MIXTAPE SELECTIONS ]
+            </div>
+
+            <div class="playlist-item active-track" data-track="0">
+              <div>
+                <strong style="font-family:var(--font-sans); font-size:1.15rem;">1. 8:30 AM Lab Hyperpop</strong>
+                <div style="font-size:1rem; color:#666;">DCE Chiptune Guild • 140 BPM</div>
+              </div>
+              <span class="pixel-btn pixel-btn-blue" style="font-size:0.6rem; padding:4px 8px;">PLAY</span>
+            </div>
+
+            <div class="playlist-item" data-track="1">
+              <div>
+                <strong style="font-family:var(--font-sans); font-size:1.15rem;">2. Canteen Chai Phonk Drive</strong>
+                <div style="font-size:1rem; color:#666;">DJ Backbencher • 150 BPM</div>
+              </div>
+              <span class="pixel-btn pixel-btn-blue" style="font-size:0.6rem; padding:4px 8px;">PLAY</span>
+            </div>
+
+            <div class="playlist-item" data-track="2">
+              <div>
+                <strong style="font-family:var(--font-sans); font-size:1.15rem;">3. Midnight Viva Exam Lo-Fi</strong>
+                <div style="font-size:1rem; color:#666;">Hostel Room 404 • 95 BPM</div>
+              </div>
+              <span class="pixel-btn pixel-btn-blue" style="font-size:0.6rem; padding:4px 8px;">PLAY</span>
+            </div>
+
+            <div class="playlist-item" data-track="3">
+              <div>
+                <strong style="font-family:var(--font-sans); font-size:1.15rem;">4. Hostel Terrace Stargazing 8-Bit</strong>
+                <div style="font-size:1rem; color:#666;">ByteBeats DCE • 120 BPM</div>
+              </div>
+              <span class="pixel-btn pixel-btn-blue" style="font-size:0.6rem; padding:4px 8px;">PLAY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           TAB 2: ART // 16x16 INTERACTIVE PIXEL PAINTPAD & EXHIBITION
+           ===================================================================== -->
+      <div id="tab-art" class="tab-content-panel" role="tabpanel">
+        <div style="margin-bottom:24px;">
+          <h2 style="font-family:var(--font-giant); font-size:1.4rem; color:var(--color-electric-blue); margin-bottom:8px;">
+            [ PIXEL ART STUDIO & CAMPUS GALLERY ]
+          </h2>
+          <p style="font-family:var(--font-label); font-size:1.3rem;">
+            Draw your own campus pixel badge live on our 16x16 canvas, or inspect student glitch art!
+          </p>
+        </div>
+
+        <div class="art-studio-grid">
+          <!-- Interactive Paintpad -->
+          <div class="paintpad-frame">
+            <div style="display:flex; justify-content:space-between; width:100%; align-items:center;">
+              <span style="font-family:var(--font-sub); font-size:0.75rem;">16x16 CANVAS</span>
+              <span style="font-size:0.9rem; color:#888;">CLICK / DRAG TO PAINT</span>
+            </div>
+
+            <!-- Canvas Grid -->
+            <div id="pixel-canvas"></div>
+
+            <!-- Color Palette -->
+            <div class="color-palette-bar">
+              <div class="color-swatch active-color" data-color="#2A1FE0" style="background:#2A1FE0;"></div>
+              <div class="color-swatch" data-color="#FF4FB8" style="background:#FF4FB8;"></div>
+              <div class="color-swatch" data-color="#00F0FF" style="background:#00F0FF;"></div>
+              <div class="color-swatch" data-color="#39FF14" style="background:#39FF14;"></div>
+              <div class="color-swatch" data-color="#FFE600" style="background:#FFE600;"></div>
+              <div class="color-swatch" data-color="#9D00FF" style="background:#9D00FF;"></div>
+              <div class="color-swatch" data-color="#0F0F14" style="background:#0F0F14;"></div>
+              <div class="color-swatch" data-color="#FFFFFF" style="background:#FFFFFF;"></div>
+            </div>
+
+            <!-- Drawing Tools -->
+            <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+              <button id="tool-pencil" class="pixel-btn pixel-btn-blue">✏️ PENCIL</button>
+              <button id="tool-eraser" class="pixel-btn">🧹 ERASER</button>
+              <button id="tool-clear" class="pixel-btn pixel-btn-yellow">🗑️ CLEAR</button>
+              <button id="tool-download" class="pixel-btn pixel-btn-pink">💾 EXPORT PNG</button>
+            </div>
+          </div>
+
+          <!-- Curated Student Art Gallery -->
+          <div>
+            <div style="font-family:var(--font-sub); font-size:0.8rem; color:var(--color-electric-blue); margin-bottom:14px;">
+              [ FEATURED STUDENT PIXEL MURALS ]
+            </div>
+
+            <div class="art-gallery-cards">
+              
+              <div class="art-card">
+                <div class="art-thumb-preview">
+                  <svg width="100%" height="100%" viewBox="0 0 32 20" shape-rendering="crispEdges">
+                    <rect x="0" y="0" width="32" height="20" fill="#141428"/>
+                    <rect x="4" y="6" width="24" height="12" fill="#2A1FE0"/>
+                    <rect x="6" y="8" width="4" height="4" fill="#FFE600"/>
+                    <rect x="14" y="8" width="4" height="4" fill="#FFE600"/>
+                    <rect x="22" y="8" width="4" height="4" fill="#FFE600"/>
+                    <rect x="12" y="14" width="8" height="6" fill="#FF4FB8"/>
+                  </svg>
+                </div>
+                <strong style="font-family:var(--font-sans); font-size:1.1rem;">"Night Lab Session"</strong>
+                <div style="font-size:0.95rem; color:#666;">By @aryan_codes</div>
+              </div>
+
+              <div class="art-card">
+                <div class="art-thumb-preview">
+                  <svg width="100%" height="100%" viewBox="0 0 32 20" shape-rendering="crispEdges">
+                    <rect x="0" y="0" width="32" height="20" fill="#FFE600"/>
+                    <rect x="6" y="4" width="20" height="12" fill="#000"/>
+                    <rect x="8" y="6" width="16" height="8" fill="#FF4FB8"/>
+                    <rect x="12" y="8" width="8" height="4" fill="#00F0FF"/>
+                  </svg>
+                </div>
+                <strong style="font-family:var(--font-sans); font-size:1.1rem;">"Glitch Samosa"</strong>
+                <div style="font-size:0.95rem; color:#666;">By @tanya_pixels</div>
+              </div>
+
+              <div class="art-card">
+                <div class="art-thumb-preview">
+                  <svg width="100%" height="100%" viewBox="0 0 32 20" shape-rendering="crispEdges">
+                    <rect x="0" y="0" width="32" height="20" fill="#00F0FF"/>
+                    <rect x="8" y="4" width="16" height="12" fill="#2A1FE0"/>
+                    <rect x="12" y="6" width="8" height="8" fill="#FFF"/>
+                    <rect x="14" y="8" width="4" height="4" fill="#FF2A55"/>
+                  </svg>
+                </div>
+                <strong style="font-family:var(--font-sans); font-size:1.1rem;">"Campus Cyber Heart"</strong>
+                <div style="font-size:0.95rem; color:#666;">By @rohit_gfx</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           TAB 3: FASHION // PIXEL AVATAR DRESS-UP & THRIFT DROPS
+           ===================================================================== -->
+      <div id="tab-fashion" class="tab-content-panel" role="tabpanel">
+        <div style="margin-bottom:24px;">
+          <h2 style="font-family:var(--font-giant); font-size:1.4rem; color:var(--color-electric-blue); margin-bottom:8px;">
+            [ CAMPUS DRIP CHECK // AVATAR STYLIST ]
+          </h2>
+          <p style="font-family:var(--font-label); font-size:1.3rem;">
+            Assemble your Y2K campus streetwear, baggy silhouettes, chunky kicks, and rate your drip score!
+          </p>
+        </div>
+
+        <div class="fashion-layout-grid">
+          <!-- Interactive Avatar Customizer -->
+          <div class="avatar-stage-box">
+            <div id="avatar-display" class="avatar-mannequin-display">
+              <!-- Rendered via JS -->
+            </div>
+
+            <div class="avatar-slot-selector">
+              <div class="slot-control-row">
+                <button class="pixel-btn fit-cycle-btn" data-slot="head" data-dir="-1">◀</button>
+                <div>🧢 <span id="head-label">Cyber Visor</span></div>
+                <button class="pixel-btn fit-cycle-btn" data-slot="head" data-dir="1">▶</button>
+              </div>
+
+              <div class="slot-control-row">
+                <button class="pixel-btn fit-cycle-btn" data-slot="top" data-dir="-1">◀</button>
+                <div>👕 <span id="top-label">DCE Hoodie</span></div>
+                <button class="pixel-btn fit-cycle-btn" data-slot="top" data-dir="1">▶</button>
+              </div>
+
+              <div class="slot-control-row">
+                <button class="pixel-btn fit-cycle-btn" data-slot="bottom" data-dir="-1">◀</button>
+                <div>👖 <span id="bottom-label">Baggy Cargo</span></div>
+                <button class="pixel-btn fit-cycle-btn" data-slot="bottom" data-dir="1">▶</button>
+              </div>
+
+              <div class="slot-control-row">
+                <button class="pixel-btn fit-cycle-btn" data-slot="shoes" data-dir="-1">◀</button>
+                <div>👟 <span id="shoes-label">Chunky Kicks</span></div>
+                <button class="pixel-btn fit-cycle-btn" data-slot="shoes" data-dir="1">▶</button>
+              </div>
+            </div>
+
+            <button id="rate-drip-btn" class="pixel-btn pixel-btn-pink" style="width:100%; margin-bottom:14px;">
+              [ RATE MY CAMPUS DRIP 🔥 ]
+            </button>
+
+            <div class="drip-score-banner">
+              <span id="drip-score-text">🔥 100/100 MAXIMUM RIZZ // Certified Fresh Campus Fit!</span>
+            </div>
+          </div>
+
+          <!-- Streetwear Merch Drops Catalog -->
+          <div>
+            <div style="font-family:var(--font-sub); font-size:0.8rem; color:var(--color-electric-blue); margin-bottom:14px;">
+              [ CHITRKAARI STREETWEAR DROPS ]
+            </div>
+
+            <div class="thrift-drops-grid">
+              
+              <div class="thrift-card">
+                <div class="thrift-tag-pill">LIMITED 50</div>
+                <div style="background:#e4e4ed; border:2px solid #000; height:120px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+                  <span style="font-size:3rem;">🧥</span>
+                </div>
+                <strong style="font-family:var(--font-sans); font-size:1.15rem;">"DCE 8-Bit Heavyweight Hoodie"</strong>
+                <div style="color:var(--color-electric-blue); font-family:var(--font-sub); font-size:0.75rem; margin:6px 0;">₹1,499 // 450 GSM</div>
+                <button class="pixel-btn pixel-btn-blue" style="width:100%; font-size:0.6rem;">ADD TO FIT</button>
+              </div>
+
+              <div class="thrift-card">
+                <div class="thrift-tag-pill" style="background:var(--color-lime);">NEW DROP</div>
+                <div style="background:#e4e4ed; border:2px solid #000; height:120px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+                  <span style="font-size:3rem;">👖</span>
+                </div>
+                <strong style="font-family:var(--font-sans); font-size:1.15rem;">"Multi-Pocket Parachute Cargos"</strong>
+                <div style="color:var(--color-electric-blue); font-family:var(--font-sub); font-size:0.75rem; margin:6px 0;">₹1,299 // RELAXED FIT</div>
+                <button class="pixel-btn pixel-btn-blue" style="width:100%; font-size:0.6rem;">ADD TO FIT</button>
+              </div>
+
+              <div class="thrift-card">
+                <div class="thrift-tag-pill" style="background:var(--color-yellow);">HOT</div>
+                <div style="background:#e4e4ed; border:2px solid #000; height:120px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+                  <span style="font-size:3rem;">🧢</span>
+                </div>
+                <strong style="font-family:var(--font-sans); font-size:1.15rem;">"Chitrkaari Pixel Beanie"</strong>
+                <div style="color:var(--color-electric-blue); font-family:var(--font-sub); font-size:0.75rem; margin:6px 0;">₹499 // NEON PINK</div>
+                <button class="pixel-btn pixel-btn-blue" style="width:100%; font-size:0.6rem;">ADD TO FIT</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           TAB 4: MEME // BRAINROT VAULT, GENERATOR & SOUNDBOARD
+           ===================================================================== -->
+      <div id="tab-meme" class="tab-content-panel" role="tabpanel">
+        <div class="meme-section-stack">
+          
+          <div>
+            <h2 style="font-family:var(--font-giant); font-size:1.4rem; color:var(--color-electric-blue); margin-bottom:8px;">
+              [ THE CAMPUS BRAINROT VAULT & SOUNDBOARD ]
+            </h2>
+            <p style="font-family:var(--font-label); font-size:1.3rem;">
+              The official archive of DCE exam survival, 75% attendance battles, and synthesized 8-bit meme pads!
+            </p>
+          </div>
+
+          <!-- 8-Bit Synthesized Meme Soundboard -->
+          <div class="soundboard-deck">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+              <span style="font-family:var(--font-sub); font-size:0.8rem; color:var(--color-yellow);">
+                📻 8-BIT RETRO MEME SOUNDBOARD
+              </span>
+              <span style="font-size:0.95rem; color:#aaa;">TRIGGER LIVE SYNTHESIZED SOUND FX</span>
+            </div>
+
+            <div class="soundboard-buttons-grid">
+              <button class="sound-pad-btn" data-sound="bruh">🔊 [ BRUH SOUND ]</button>
+              <button class="sound-pad-btn" data-sound="damage">💥 [ EMOTIONAL DAMAGE ]</button>
+              <button class="sound-pad-btn" data-sound="aura">✨ [ AURA +1000 ]</button>
+              <button class="sound-pad-btn" data-sound="skibidi">⚡ [ SKIBIDI BEEP ]</button>
+              <button class="sound-pad-btn" data-sound="viva">💀 [ VIVA SURVIVED ]</button>
+              <button class="sound-pad-btn" data-sound="attendance">🏆 [ 75% ATTENDANCE WON ]</button>
+            </div>
+          </div>
+
+          <!-- Interactive Live Meme Generator -->
+          <div class="meme-gen-container">
+            <div class="meme-preview-canvas-box" id="meme-preview-box">
+              <div id="meme-top-display" class="meme-text-top">WHEN 8:30 AM CLASS</div>
+              <div id="meme-image-holder" style="width:140px; height:140px; display:flex; align-items:center; justify-content:center; margin:auto;">
+                <!-- Template image rendered by JS -->
+              </div>
+              <div id="meme-bottom-display" class="meme-text-bottom">BUT ATTENDANCE IS MANDATORY</div>
+            </div>
+
+            <div class="meme-input-group">
+              <div style="font-family:var(--font-sub); font-size:0.75rem; color:var(--color-electric-blue);">
+                [ CREATE YOUR CAMPUS MEME ]
+              </div>
+
+              <div>
+                <label style="display:block; margin-bottom:4px;">CHOOSE TEMPLATE:</label>
+                <select id="meme-template-select" class="pixel-input" style="width:100%;">
+                  <option value="0">75% Attendance Cat</option>
+                  <option value="1">3 AM Coding Viva Panic</option>
+                  <option value="2">Canteen Samosa Stare</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="display:block; margin-bottom:4px;">TOP PUNCHLINE:</label>
+                <input id="meme-top-input" type="text" class="pixel-input" style="width:100%;" value="WHEN 8:30 AM CLASS">
+              </div>
+
+              <div>
+                <label style="display:block; margin-bottom:4px;">BOTTOM PUNCHLINE:</label>
+                <input id="meme-bottom-input" type="text" class="pixel-input" style="width:100%;" value="BUT ATTENDANCE IS MANDATORY">
+              </div>
+
+              <div style="display:flex; gap:10px; margin-top:6px;">
+                <button class="pixel-btn pixel-btn-pink" onclick="if(window.retroAudio) window.retroAudio.playMemeSound('aura'); alert('Meme copied to clipboard! Ready to share in DCE WhatsApp group.');">
+                  [ COPY MEME PUNCHLINE ]
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Campus Memes -->
+          <div>
+            <div style="font-family:var(--font-sub); font-size:0.8rem; color:var(--color-electric-blue); margin-bottom:14px;">
+              [ VIRAL DCE CAMPUS MEMES ]
+            </div>
+
+            <div class="meme-gallery-grid">
+              
+              <div class="meme-card">
+                <div class="meme-art-box" style="background:#2A1FE0;">
+                  <span style="font-size:3.5rem;">🐱</span>
+                </div>
+                <strong style="font-family:var(--font-sans); font-size:1.1rem;">"Me calculating 74.8% attendance"</strong>
+                <p style="font-size:0.95rem; color:#666; margin:6px 0 10px;">Professor: Decimal rounds down, bro.</p>
+                <button class="meme-vote-btn">
+                  <span>❤️</span> <span class="vote-count">482</span> UPVOTES
+                </button>
+              </div>
+
+              <div class="meme-card">
+                <div class="meme-art-box" style="background:#000;">
+                  <span style="font-size:3.5rem;">💻</span>
+                </div>
+                <strong style="font-family:var(--font-sans); font-size:1.1rem;">"Viva Examiner: Explain Line 4"</strong>
+                <p style="font-size:0.95rem; color:#666; margin:6px 0 10px;">Me who copied code from StackOverflow:</p>
+                <button class="meme-vote-btn">
+                  <span>❤️</span> <span class="vote-count">731</span> UPVOTES
+                </button>
+              </div>
+
+              <div class="meme-card">
+                <div class="meme-art-box" style="background:#FF4FB8;">
+                  <span style="font-size:3.5rem;">🥟</span>
+                </div>
+                <strong style="font-family:var(--font-sans); font-size:1.1rem;">"Canteen Samosa at 1:15 PM"</strong>
+                <p style="font-size:0.95rem; color:#666; margin:6px 0 10px;">The only thing sustaining engineering students.</p>
+                <button class="meme-vote-btn">
+                  <span>❤️</span> <span class="vote-count">920</span> UPVOTES
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           TAB 5: INTERNET TRENDS // AURA TRACKER, SLANG & STREAM
+           ===================================================================== -->
+      <div id="tab-trends" class="tab-content-panel" role="tabpanel">
+        <div style="margin-bottom:24px;">
+          <h2 style="font-family:var(--font-giant); font-size:1.4rem; color:var(--color-electric-blue); margin-bottom:8px;">
+            [ THE GEN-Z CAMPUS TREND RADAR ]
+          </h2>
+          <p style="font-family:var(--font-label); font-size:1.3rem;">
+            Real-time campus aura calculator, brainrot slang decoder, and simulated NPC live chat!
+          </p>
+        </div>
+
+        <div class="trends-deck-grid">
+          <!-- Campus Aura Points Calculator -->
+          <div class="aura-calculator-box">
+            <div style="font-family:var(--font-sub); font-size:0.8rem; color:var(--color-electric-blue); margin-bottom:12px;">
+              [ LIVE CAMPUS AURA CALCULATOR ]
+            </div>
+
+            <div class="aura-score-display">
+              <div style="font-size:0.85rem; font-family:var(--font-sub); margin-bottom:4px;">YOUR TOTAL AURA POINTS</div>
+              <div id="aura-score-total" class="aura-score-number">2,500</div>
+              <div id="aura-rank-badge" style="margin-top:6px; font-family:var(--font-sub); font-size:0.75rem; color:var(--color-cyan);">
+                CAMPUS CITIZEN
+              </div>
+            </div>
+
+            <div class="aura-checklist">
+              <label class="aura-check-item">
+                <input type="checkbox" class="aura-check" data-aura="500">
+                <span>Arrived on time for 8:30 AM class (+500 Aura)</span>
+              </label>
+
+              <label class="aura-check-item">
+                <input type="checkbox" class="aura-check" data-aura="1000">
+                <span>Answered professor's trick question correctly (+1000 Aura)</span>
+              </label>
+
+              <label class="aura-check-item">
+                <input type="checkbox" class="aura-check" data-aura="-1500">
+                <span>Phone rang loudly during silent lecture (-1500 Aura)</span>
+              </label>
+
+              <label class="aura-check-item">
+                <input type="checkbox" class="aura-check" data-aura="800">
+                <span>Grabbed last hot samosa in the canteen (+800 Aura)</span>
+              </label>
+
+              <label class="aura-check-item">
+                <input type="checkbox" class="aura-check" data-aura="1500">
+                <span>Code compiled on first try in front of teacher (+1500 Aura)</span>
+              </label>
+
+              <label class="aura-check-item">
+                <input type="checkbox" class="aura-check" data-aura="-2000">
+                <span>Forgot pen and ID card on exam day (-2000 Aura)</span>
+              </label>
+
+              <label class="aura-check-item">
+                <input type="checkbox" class="aura-check" data-aura="2000">
+                <span>Fixed friend's attendance proxy successfully (+2000 Aura)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- NPC Campus Live Stream Simulator -->
+          <div class="npc-stream-simulator">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="color:#FF2A55; animation:pulseBlink 1s infinite alternate;">● LIVE</span>
+                <span style="font-family:var(--font-sub); font-size:0.7rem;">DCE_CAMPUS_FEED.STREAM</span>
+              </div>
+              <span style="font-size:0.95rem; color:var(--color-yellow);">👀 1,429 VIEWERS</span>
+            </div>
+
+            <!-- Simulated scrolling chat feed -->
+            <div id="stream-chat-feed" class="stream-chat-feed">
+              <div class="chat-bubble"><span class="username">@campus_oracle:</span> Welcome to the stream chat!</div>
+              <div class="chat-bubble"><span class="username">@pixel_girlie:</span> Chitrkaari website is straight fire 🔥</div>
+              <div class="chat-bubble"><span class="username">@hostel_room12:</span> Who's ordering roll from outside?</div>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+              <input type="text" id="stream-chat-input" class="pixel-input" style="flex:1; background:#000; color:#fff;" placeholder="Drop a campus comment...">
+              <button id="stream-heart-btn" class="pixel-btn pixel-btn-pink" title="Send Heart Sparks">
+                ❤️ SPAM
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campus Slang Glossary -->
+        <div style="margin-top:32px; background:var(--bg-primary); border:3px solid var(--color-border); padding:24px; box-shadow:var(--shadow-1step);">
+          <div style="font-family:var(--font-sub); font-size:0.8rem; color:var(--color-electric-blue); margin-bottom:12px;">
+            [ DCE GEN-Z SLANG & LORE RADAR ]
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
+            <div style="background:#fff; border:2px solid #000; padding:12px;">
+              <strong style="font-family:var(--font-giant); font-size:0.75rem; color:var(--color-electric-blue);">PHANTOM ATTENDANCE</strong>
+              <p style="font-size:1rem; color:#555; margin-top:4px;">When your proxy was called but nobody knows who answered.</p>
+            </div>
+            <div style="background:#fff; border:2px solid #000; padding:12px;">
+              <strong style="font-family:var(--font-giant); font-size:0.75rem; color:var(--color-hot-pink);">CANTEEN PROTOCOL</strong>
+              <p style="font-size:1rem; color:#555; margin-top:4px;">Sacrificing 3rd period lecture to get fresh chai and hot samosas.</p>
+            </div>
+            <div style="background:#fff; border:2px solid #000; padding:12px;">
+              <strong style="font-family:var(--font-giant); font-size:0.75rem; color:var(--color-purple);">VIVA DELUSION</strong>
+              <p style="font-size:1rem; color:#555; margin-top:4px;">Nodding aggressively at the examiner while having zero clues.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Agency Footer -->
+    <footer class="agency-footer-section">
+      <div class="footer-inner-container">
+        
+        <div class="footer-brand-col">
+          <div class="footer-brand-title">CHITRKAARI.EXE</div>
+          <p class="footer-tagline">
+            The creative agency for campus fests, pixel aesthetics, streetwear drops, digital identities & Gen-Z subcultures at Dronacharya College of Engineering.
+          </p>
+          <div style="display:flex; gap:10px;">
+            <button class="pixel-btn pixel-btn-pink" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+              ▲ TOP
+            </button>
+            <button class="pixel-btn pixel-btn-yellow" onclick="if(window.bugEngine) window.bugEngine.spawnBugs(5);">
+              +5 BUGS 🐛
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <strong style="font-family:var(--font-sub); font-size:0.8rem; color:var(--color-yellow);">DISCIPLINES</strong>
+          <a href="#culture-section" onclick="document.querySelector('[data-tab=music]').click()">01 // 8-Bit Chiptune & Sound</a>
+          <a href="#culture-section" onclick="document.querySelector('[data-tab=art]').click()">02 // Pixel Art Canvas</a>
+          <a href="#culture-section" onclick="document.querySelector('[data-tab=fashion]').click()">03 // Streetwear & Fit Check</a>
+          <a href="#culture-section" onclick="document.querySelector('[data-tab=meme]').click()">04 // Brainrot Archive</a>
+          <a href="#culture-section" onclick="document.querySelector('[data-tab=trends]').click()">05 // Internet Trend Radar</a>
+        </div>
+
+        <div class="footer-links-col">
+          <strong style="font-family:var(--font-sub); font-size:0.8rem; color:var(--color-yellow);">HEADQUARTERS</strong>
+          <div>Dronacharya College of Engineering</div>
+          <div>Gurugram, Haryana // Creative Lab 404</div>
+          <div>Contact: hello@chitrkaari.agency</div>
+          <div style="color:var(--color-lime); margin-top:6px;">● HIRING CAMPUS REPS</div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-row">
+        <div>© 2026 CHITRKAARI CREATIVE AGENCY. ALL RIGHTS RESERVED.</div>
+        <div>RENDER MODE: PIXELATED // CRT SCANLINES AVAILABLE</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Modular Scripts -->
+  <script src="audio.js"></script>
+  <script src="rain.js"></script>
+  <script src="clouds.js"></script>
+  <script src="bugs.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
