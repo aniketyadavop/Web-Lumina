@@ -39,7 +39,7 @@
       <div class="landing-weather-pill">
         <span>⚡ WEATHER: THUNDERSTORM</span>
         <span style="opacity:0.6;">|</span>
-        <span>WIND: CURSOR TRACKING</span>
+        <span id="wind-mode-label">WIND: CURSOR / TOUCH / TILT</span>
       </div>
     </header>
 
@@ -59,7 +59,7 @@
         <span class="pixel-arrow">▶▶</span>
       </button>
       <div class="landing-hint">
-        ⚡ MOVE CURSOR TO STEER THE STORM • TAP START TO ENTER
+        ⚡ DRAG / TILT PHONE TO STEER STORM • TAP START TO ENTER
       </div>
     </footer>
   </section>
@@ -119,6 +119,11 @@
           ⚡ STORM GATE
         </button>
       </div>
+
+      <!-- Mobile Hamburger / Drawer Toggle Button -->
+      <button id="mobile-menu-toggle" class="pixel-btn pixel-mobile-toggle" aria-label="Toggle Navigation Menu">
+        <span class="pixel-hamburger-icon">☰ MENU</span>
+      </button>
     </nav>
 
     <!-- Agency Hero Header Section -->

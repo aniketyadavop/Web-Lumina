@@ -47,6 +47,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Mobile Navigation Drawer Toggle
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const navActions = document.querySelector('.nav-actions');
+  if (mobileMenuToggle && navActions) {
+    mobileMenuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navActions.classList.toggle('mobile-open');
+      mobileMenuToggle.classList.toggle('active', isOpen);
+      mobileMenuToggle.innerHTML = isOpen 
+        ? '<span class="pixel-hamburger-icon">✕ CLOSE</span>' 
+        : '<span class="pixel-hamburger-icon">☰ MENU</span>';
+      if (window.retroAudio) window.retroAudio.playClick();
+    });
+
+    // Close mobile drawer when an action button inside it is clicked
+    navActions.querySelectorAll('.pixel-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (window.innerWidth <= 840) {
+          navActions.classList.remove('mobile-open');
+          mobileMenuToggle.classList.remove('active');
+          mobileMenuToggle.innerHTML = '<span class="pixel-hamburger-icon">☰ MENU</span>';
+        }
+      });
+    });
+
+    // Close when tapping outside
+    document.addEventListener('click', (e) => {
+      if (navActions.classList.contains('mobile-open') && !navActions.contains(e.target) && e.target !== mobileMenuToggle) {
+        navActions.classList.remove('mobile-open');
+        mobileMenuToggle.classList.remove('active');
+        mobileMenuToggle.innerHTML = '<span class="pixel-hamburger-icon">☰ MENU</span>';
+      }
+    });
+  }
+
   // Add retro hover & click sound to buttons
   document.querySelectorAll('button, .clickable, .tab-btn, .color-swatch, .playlist-item').forEach(el => {
     el.addEventListener('mouseenter', () => {
@@ -76,6 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (startBtn && landingGate) {
     startBtn.addEventListener('click', (e) => {
       e.preventDefault();
+
+      // Trigger iOS device orientation permission on user gesture if available
+      if (typeof window.requestDeviceOrientationPermission === 'function') {
+        window.requestDeviceOrientationPermission();
+      }
+
       if (window.retroAudio) {
         window.retroAudio.playStartFanfare();
         window.retroAudio.stopRainAudio();

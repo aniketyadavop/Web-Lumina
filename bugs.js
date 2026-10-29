@@ -167,6 +167,22 @@ class PixelBugEngine {
       this.mouseY = e.clientY;
     });
 
+    // Mobile touch tracking so bugs scurry away from fingers & can be tapped
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches.length > 0) {
+        this.mouseX = e.touches[0].clientX;
+        this.mouseY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      // Clear touch proximity when lifted
+      setTimeout(() => {
+        this.mouseX = -1000;
+        this.mouseY = -1000;
+      }, 300);
+    });
+
     // Spawn initial swarm of 12 bugs crawling across the site
     this.spawnBugs(12);
 
@@ -218,11 +234,16 @@ class PixelBugEngine {
       turnTimer: 30 + Math.random() * 80
     };
 
-    // Click handler for squashing!
+    // Click and touch handlers for squashing!
     el.addEventListener('click', (e) => {
       e.stopPropagation();
       this.squashBug(bug);
     });
+
+    el.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+      this.squashBug(bug);
+    }, { passive: true });
 
     this.container.appendChild(el);
     this.bugs.push(bug);

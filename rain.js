@@ -25,6 +25,8 @@ class PixelRainEngine {
     this.currentSlant = 0;
     this.isMouseActive = false;
     this.mouseMoveTimeout = null;
+    this.touchRipples = [];
+    this.gyroEnabled = false;
     
     this.init();
   }
@@ -65,21 +67,103 @@ class PixelRainEngine {
       }, 150);
     });
 
-    // Touch support for mobile/tablets
-    window.addEventListener('touchmove', (e) => {
+    // Touch support for mobile/tablets with drag inertia & ripple spawn
+    window.addEventListener('touchstart', (e) => {
       if (e.touches && e.touches.length > 0) {
+        this.isMouseActive = true;
         const touch = e.touches[0];
-        const vx = touch.clientX - this.lastMouseX;
         this.lastMouseX = touch.clientX;
         this.mouseX = touch.clientX;
         this.mouseY = touch.clientY;
-        const centerFactor = (touch.clientX - this.width / 2) / (this.width / 2);
-        this.targetSlant = (centerFactor * 1.8) + (vx * 0.08);
-        this.targetSlant = Math.max(-2.5, Math.min(2.5, this.targetSlant));
+        this.createTouchRipple(touch.clientX, touch.clientY);
+        this.createSplash(touch.clientX, touch.clientY, 5);
       }
     }, { passive: true });
 
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches.length > 0) {
+        this.isMouseActive = true;
+        const touch = e.touches[0];
+        const vx = touch.clientX - this.lastMouseX;
+        this.mouseVx = vx;
+        this.lastMouseX = touch.clientX;
+        this.mouseX = touch.clientX;
+        this.mouseY = touch.clientY;
+
+        const centerFactor = (touch.clientX - this.width / 2) / (this.width / 2);
+        const velocityFactor = Math.max(-18, Math.min(18, vx)) * 0.12;
+        this.targetSlant = (centerFactor * 1.8) + velocityFactor;
+        this.targetSlant = Math.max(-2.6, Math.min(2.6, this.targetSlant));
+
+        // Occasional trail splash while dragging
+        if (Math.random() < 0.3) {
+          this.createSplash(touch.clientX, touch.clientY, 2);
+        }
+
+        clearTimeout(this.mouseMoveTimeout);
+        this.mouseMoveTimeout = setTimeout(() => {
+          this.targetSlant = centerFactor * 1.4;
+          this.mouseVx = 0;
+        }, 180);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      // Release touch gradually
+      clearTimeout(this.mouseMoveTimeout);
+      this.mouseMoveTimeout = setTimeout(() => {
+        this.isMouseActive = false;
+        this.targetSlant = 0;
+      }, 500);
+    });
+
+    // Mobile Device Tilt / Gyroscope (DeviceOrientation API)
+    this.initGyroscope();
+
     this.animate();
+  }
+
+  initGyroscope() {
+    if (window.DeviceOrientationEvent) {
+      const handleOrientation = (e) => {
+        // gamma is left-to-right tilt in degrees [-90, 90]
+        if (e.gamma !== null && e.gamma !== undefined) {
+          this.gyroEnabled = true;
+          // Scale -45 to +45 deg tilt into slant [-2.4, 2.4]
+          const tiltFactor = Math.max(-45, Math.min(45, e.gamma)) / 45;
+          // Blend with targetSlant when user isn't actively dragging
+          if (!this.isMouseActive) {
+            this.targetSlant = tiltFactor * 2.3;
+          }
+        }
+      };
+
+      // iOS 13+ requires user permission requested on user gesture
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        window.requestDeviceOrientationPermission = () => {
+          DeviceOrientationEvent.requestPermission()
+            .then(state => {
+              if (state === 'granted') {
+                window.addEventListener('deviceorientation', handleOrientation);
+              }
+            })
+            .catch(err => console.log('Gyro error:', err));
+        };
+      } else {
+        window.addEventListener('deviceorientation', handleOrientation);
+      }
+    }
+  }
+
+  createTouchRipple(x, y) {
+    this.touchRipples.push({
+      x: x,
+      y: y,
+      radius: 4,
+      maxRadius: 42,
+      alpha: 0.9,
+      speed: 2.2
+    });
   }
 
   resize() {
@@ -190,6 +274,26 @@ class PixelRainEngine {
 
       this.ctx.fillStyle = `rgba(220, 245, 255, ${s.alpha})`;
       this.ctx.fillRect(Math.floor(s.x), Math.floor(s.y), s.size, s.size);
+    }
+
+    // Render & update interactive touch ripples
+    for (let k = this.touchRipples.length - 1; k >= 0; k--) {
+      const r = this.touchRipples[k];
+      r.radius += r.speed;
+      r.alpha *= 0.92;
+
+      if (r.alpha < 0.04 || r.radius >= r.maxRadius) {
+        this.touchRipples.splice(k, 1);
+        continue;
+      }
+
+      this.ctx.save();
+      this.ctx.strokeStyle = `rgba(0, 255, 204, ${r.alpha})`;
+      this.ctx.lineWidth = 2;
+      this.ctx.beginPath();
+      this.ctx.arc(Math.floor(r.x), Math.floor(r.y), Math.floor(r.radius), 0, Math.PI * 2);
+      this.ctx.stroke();
+      this.ctx.restore();
     }
 
     requestAnimationFrame(() => this.animate());

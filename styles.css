@@ -410,11 +410,25 @@ button:hover, a:hover, .clickable:hover {
   gap: 10px;
 }
 
+/* Mobile Hamburger Toggle */
+.pixel-mobile-toggle {
+  display: none;
+  background: var(--color-yellow);
+  color: var(--color-black);
+  font-weight: bold;
+}
+
+.pixel-mobile-toggle.active {
+  background: var(--color-hot-pink);
+  color: #fff;
+}
+
 /* Retro Pixel Button Styles */
 .pixel-btn {
   font-family: var(--font-sub);
   font-size: 0.68rem;
   padding: 10px 16px;
+  min-height: 44px; /* Touch-friendly tap target */
   border: 3px solid var(--color-border);
   box-shadow: var(--shadow-1step);
   background: var(--color-white);
@@ -426,6 +440,7 @@ button:hover, a:hover, .clickable:hover {
   user-select: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
@@ -1475,4 +1490,182 @@ body.crt-active .crt-overlay {
 @keyframes splatParticle {
   0% { opacity: 1; transform: translate(0, 0); }
   100% { opacity: 0; transform: translate(var(--vx), var(--vy)); }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN & MOBILE TOUCH BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  /* Landing Gate Mobile HUD */
+  .landing-hud-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .landing-badge {
+    font-size: 1rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .landing-weather-pill {
+    font-size: 0.6rem;
+    justify-content: center;
+  }
+
+  .landing-title-card {
+    padding: 16px 20px;
+    margin: auto 12px 16px;
+  }
+
+  .landing-brand-heading {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+  }
+
+  .landing-subheading {
+    font-size: 1.1rem;
+  }
+
+  .start-btn-pixel {
+    padding: 14px 22px;
+    font-size: 0.72rem;
+    min-height: 52px;
+  }
+
+  /* Main App Header & Nav */
+  .pixel-navbar {
+    padding: 10px 14px;
+    position: sticky;
+    top: 0;
+  }
+
+  .pixel-mobile-toggle {
+    display: inline-flex;
+    padding: 8px 12px;
+    font-size: 0.65rem;
+    min-height: 40px;
+  }
+
+  /* Nav actions becomes a collapsible pixel drawer */
+  .nav-actions {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    background: #FFFFFF;
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-2step);
+    padding: 14px;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .nav-actions.mobile-open {
+    display: flex;
+    animation: tabFadeIn 0.2s steps(4);
+  }
+
+  .nav-actions .pixel-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+  }
+
+  .nav-center-info {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .nav-stat-pill {
+    font-size: 0.95rem;
+    padding: 4px 8px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* Main app grids & cards stack neatly on smaller screens */
+  .hero-card-frame,
+  .manifesto-grid,
+  .tabs-nav,
+  .tool-layout,
+  .showcase-grid,
+  .merch-grid,
+  .stream-layout {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+  }
+
+  .tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tab-btn {
+    flex: 1 1 calc(50% - 6px);
+    font-size: 0.6rem !important;
+    padding: 10px 8px !important;
+    min-height: 44px;
+  }
+
+  /* Canvas and Tool touch areas */
+  .pixel-canvas-wrapper,
+  .pixel-editor-frame {
+    width: 100% !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .color-palette-bar {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .color-swatch {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  /* Giant Titles */
+  .pixel-giant-title {
+    font-size: clamp(2rem, 10vw, 3.2rem) !important;
+    line-height: 1.1;
+  }
+
+  .section-heading-pixel {
+    font-size: clamp(1.4rem, 6vw, 2.2rem) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-brand-heading {
+    font-size: 1.8rem;
+  }
+
+  .landing-subheading {
+    font-size: 0.95rem;
+  }
+
+  .landing-hint {
+    font-size: 0.55rem;
+  }
+
+  .start-btn-pixel {
+    width: 90%;
+    font-size: 0.65rem;
+  }
+
+  .tab-btn {
+    flex: 1 1 100%;
+  }
+
+  .pixel-btn {
+    font-size: 0.62rem;
+  }
 }
